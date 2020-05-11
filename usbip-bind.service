@@ -1,0 +1,16 @@
+[Unit]
+Description=USB-IP Binding on %I (grep string)
+After=network-online.target usbipd.service
+Wants=network-online.target
+Requires=usbipd.service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /etc/usbip/usbip-bind.sh
+RemainAfterExit=yes
+ExecStop=/bin/bash /etc/usbip/usbip-unbind.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
